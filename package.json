@@ -12,6 +12,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "puppeteer": "^24.38.0"
+    "puppeteer": "^24.38.0",
+    "zod": "^4.3.6"
   }
 }

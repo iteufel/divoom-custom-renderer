@@ -1,0 +1,20 @@
+# Divoom TimeFrame custom renderer config
+# Copy to divoom-renderer.yaml and edit
+# Env vars (DIVOOM_IP, SERVE_HOST, TARGET_URL) override these values
+
+# URL to capture as background
+targetUrl: https://example.com
+
+# Your machine's LAN IP (device fetches screenshot from here)
+serveHost: 192.168.1.10
+servePort: 8765
+
+# Screenshot size — must match display (800×1280)
+viewportWidth: 800
+viewportHeight: 1280
+
+# Overlays (set false to hide)
+showClock: true
+showDate: true
+showWeather: false
+showTemperature: false

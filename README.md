@@ -34,4 +34,16 @@ Auto-refresh runs every **10 seconds** by default. Press `Ctrl+C` to exit and le
 
 ## Config
 
-Edit `config.ts` to toggle overlays: `showClock`, `showDate`, `showWeather`, `showTemperature`.
+**YAML config:** Create `divoom-renderer.yaml` in the project directory (or set `DIVOOM_CONFIG` to a path). Copy `divoom-renderer.example.yaml` and edit:
+
+```yaml
+targetUrl: https://example.com
+serveHost: 192.168.1.10
+servePort: 8765
+showClock: true
+showDate: true
+showWeather: false
+showTemperature: false
+```
+
+Env vars override YAML. You can also edit `config.ts` for defaults.
