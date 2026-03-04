@@ -1,5 +1,7 @@
 {
   "name": "divoom-custom-renderer",
+  "license": "MIT",
+  "bin": "render.ts",
   "module": "index.ts",
   "type": "module",
   "private": true,

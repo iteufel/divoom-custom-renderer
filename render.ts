@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 import { captureWebpage, makeScreenshotPath } from "./screenshot";
 import { startFileServer } from "./server";
 import { buildOverlays }   from "./overlays";
