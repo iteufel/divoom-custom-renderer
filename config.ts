@@ -1,6 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
+import { getLocalIpForSubnet } from "./network";
 
 const yamlConfigSchema = z.object({
   divoomPort: z.number().optional(),
@@ -91,3 +92,21 @@ function buildConfig(): Config {
 }
 
 export const config = buildConfig();
+
+/**
+ * Resolves SERVE_HOST: uses env/yaml if set, otherwise auto-detects local IP
+ * in the same subnet as the TimeFrame device.
+ */
+export function resolveServeHost(divoomIp: string): string {
+  const explicit = process.env.SERVE_HOST ?? loadYamlConfig().serveHost;
+  if (explicit) return explicit;
+  const local = getLocalIpForSubnet(divoomIp);
+  if (local) {
+    console.log(`🌐 SERVE_HOST auto-detected from TimeFrame subnet: ${local}`);
+    return local;
+  }
+  console.warn(
+    `⚠️ Could not find local IP in same subnet as ${divoomIp}, using default ${DEFAULTS.serveHost}`,
+  );
+  return DEFAULTS.serveHost;
+}

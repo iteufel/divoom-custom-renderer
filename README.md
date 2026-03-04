@@ -27,7 +27,7 @@ Auto-refresh runs every **10 seconds** by default. Press `Ctrl+C` to exit and le
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `DIVOOM_IP` | TimeFrame IP on your LAN (optional – auto-discovered via Divoom API if unset) | — |
-| `SERVE_HOST` | Your machine’s LAN IP (device fetches screenshot from here) | `192.168.1.10` |
+| `SERVE_HOST` | Your machine’s LAN IP (device fetches screenshot from here). Auto-detected from TimeFrame subnet when unset. | `192.168.1.10` |
 | `TARGET_URL` | URL to capture as background | `https://example.com` |
 | `INTERVAL_MS` | Refresh interval (ms) | `10000` (10s) |
 | `LOOP` | Set to `0` to run once (no loop) | auto-refresh enabled |

@@ -4,7 +4,7 @@ import { startFileServer } from "./server";
 import { buildOverlays }   from "./overlays";
 import { enterCustomMode, exitCustomMode } from "./divoom";
 import { discoverDivoomIp } from "./discover";
-import { config } from "./config";
+import { config, resolveServeHost } from "./config";
 
 // ── Optional: Weather WebP animation URL (10-frame webp per Divoom spec) ──────
 const WEATHER_WEBP_URL =
@@ -15,13 +15,15 @@ async function getDivoomIp(): Promise<string> {
 }
 
 async function render(divoomIp: string) {
+  const serveHost = resolveServeHost(divoomIp);
+
   // 1. Take screenshot of the target URL (unique filename per run)
   const screenshotPath = makeScreenshotPath();
   const serveFilename = screenshotPath.split("/").pop()!;
   await captureWebpage(config.targetUrl, screenshotPath);
 
-  // 2. Start local HTTP server so device can fetch the screenshot
-  const { url: imageUrl, stop } = startFileServer(screenshotPath, serveFilename);
+  // 2. Start local HTTP server so device can fetch the screenshot (only TimeFrame allowed)
+  const { url: imageUrl, stop } = startFileServer(screenshotPath, serveFilename, serveHost, divoomIp);
 
   try {
     // 3. Build overlay elements (clock, date, weather, etc.)
