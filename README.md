@@ -10,17 +10,24 @@ bun install
 
 ## Run
 
+Minimal run (device and `SERVE_HOST` are auto-discovered):
+
 ```bash
-SERVE_HOST=192.168.0.123 TARGET_URL=https://example.com bun run render.ts
+TARGET_URL=https://example.com bun run render.ts
 ```
 
-`DIVOOM_IP` is optional — the device is auto-discovered via the Divoom cloud API when unset. Set it manually if discovery fails:
+Optional overrides:
 
 ```bash
 DIVOOM_IP=192.168.0.8 SERVE_HOST=192.168.0.123 TARGET_URL=https://example.com bun run render.ts
 ```
 
+- **`DIVOOM_IP`** — device is auto-discovered via the Divoom cloud API when unset. Set manually if discovery fails.
+- **`SERVE_HOST`** — auto-detected from the TimeFrame subnet when unset (your machine's LAN IP on the same network as the device).
+
 Auto-refresh runs every **10 seconds** by default. Press `Ctrl+C` to exit and leave custom mode cleanly.
+
+The file server only accepts requests from the TimeFrame device; all other clients receive `403 Forbidden`.
 
 ## Environment variables
 
@@ -38,7 +45,7 @@ Auto-refresh runs every **10 seconds** by default. Press `Ctrl+C` to exit and le
 
 ```yaml
 targetUrl: https://example.com
-serveHost: 192.168.1.10
+# serveHost: 192.168.1.10   # optional – auto-detected from TimeFrame subnet
 servePort: 8765
 showClock: true
 showDate: true
