@@ -6,11 +6,22 @@ async function apiCall(
   body: Record<string, unknown>,
 ): Promise<{ ReturnCode: number }> {
   const base = `http://${divoomIp}:${config.divoomPort}/divoom_api`;
-  const res = await fetch(base, {
-    method:  "POST",
-    headers: { "Content-Type": "application/json" },
-    body:    JSON.stringify(body),
-  });
+  let res: Response;
+  try {
+    res = await fetch(base, {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(body),
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new Error(
+      `Cannot reach TimeFrame at ${base}: ${msg}\n` +
+        `  → Check device is on and awake\n` +
+        `  → Try DIVOOM_PORT=5200 if 9000 fails (some models use 5200)\n` +
+        `  → Verify device is on same network as this machine`,
+    );
+  }
 
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} from device`);

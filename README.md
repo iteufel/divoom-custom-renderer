@@ -34,6 +34,7 @@ The file server only accepts requests from the TimeFrame device; all other clien
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `DIVOOM_IP` | TimeFrame IP on your LAN (optional – auto-discovered via Divoom API if unset) | — |
+| `DIVOOM_PORT` | TimeFrame API port (try `5200` if connection to default fails) | `9000` |
 | `SERVE_HOST` | Your machine’s LAN IP (device fetches screenshot from here). Auto-detected from TimeFrame subnet when unset. | `192.168.1.10` |
 | `TARGET_URL` | URL to capture as background | `https://example.com` |
 | `INTERVAL_MS` | Refresh interval (ms) | `10000` (10s) |

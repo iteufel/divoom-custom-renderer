@@ -76,7 +76,10 @@ function buildConfig(): Config {
   const yaml = loadYamlConfig();
 
   const config = {
-    divoomPort: yaml.divoomPort ?? DEFAULTS.divoomPort,
+    divoomPort:
+      process.env.DIVOOM_PORT !== undefined
+        ? Number(process.env.DIVOOM_PORT)
+        : yaml.divoomPort ?? DEFAULTS.divoomPort,
     targetUrl: process.env.TARGET_URL ?? yaml.targetUrl ?? DEFAULTS.targetUrl,
     serveHost: process.env.SERVE_HOST ?? yaml.serveHost ?? DEFAULTS.serveHost,
     servePort: yaml.servePort ?? DEFAULTS.servePort,
